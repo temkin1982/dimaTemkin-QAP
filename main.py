@@ -1,7 +1,12 @@
+
+import random
+
+
 """
 Задача 1: привести числа -1.6 и 2.99 к целому типу
 
 """
+
 first_num = -1.6
 second_num = 2.99
 
@@ -51,7 +56,10 @@ print(withOut_space)
 Задача 6: создать словарь school с количеством учеников в 10 разных классах
 
 """
-
+school_dict = {f"{i}{j}": random.randint(21, 30)
+               for i in range(1, 12)
+               for j in "abcd"}
+print(school_dict)
 school_dict = {
     "1a": 22, 
     "1b": 24, 

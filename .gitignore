@@ -1,0 +1,16 @@
+# VS Code temporary files
+.vscode/
+tempCodeRunnerFile.py
+
+# Ruff cache
+.ruff_cache/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environments
+venv/
+.env/
