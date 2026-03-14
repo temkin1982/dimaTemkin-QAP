@@ -188,5 +188,6 @@ def is_lucky_number(number: int):
     return False
 
 
+
 check_lucky_number = int(input("Please enter a number to check if it is lucky: "))
 print(is_lucky_number(check_lucky_number))
