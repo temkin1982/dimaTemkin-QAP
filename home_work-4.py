@@ -71,7 +71,6 @@ print(open("grades_with_status.txt").read())
 3. Напиши функцию age_calculator(birth_date_str: str) -> int 
 которая принимает дату рождения в формате 'dd/mm/yyyy' (input)  и возвращает полных лет.
 """
-from datetime import datetime
 
 def age_calculator(birth_date_str: str) -> int:
     birth_date = datetime.strptime(birth_date_str, "%d/%m/%Y")
