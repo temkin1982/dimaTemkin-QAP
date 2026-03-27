@@ -1,4 +1,5 @@
-from typing import List
+import math
+from typing import Iterator, List, Any, Callable,Optional
 
 """
 1. Используя filter() и lambda, 
@@ -17,7 +18,7 @@ print(odd_numbers)
 последовательно применяя каждую ко всему списку.
 """
 
-def apply_operations(numbers: list, *operations) -> List[int]:
+def apply_operations(numbers: list, *operations) -> list[int]:
 
     for op in operations:
         numbers = op(numbers)
@@ -36,7 +37,7 @@ print(apply_operations(
 Например, chunked([1,2,3,4,5], 2) → [1,2], [3,4], [5].
 """
 
-from typing import Iterator, List
+
 
 def chunked(lst: list, size: int) -> Iterator[List[int]]:
     i = 0
@@ -81,14 +82,14 @@ print(result)
 которая пытается преобразовать value с помощью переданной функции (например, int, float). 
 При ошибке возвращает None.
 """
-from typing import Any, Callable
 
 
-def safe_convert(value: Any, type_func: Callable) -> Any | None:
+def safe_convert(value: Any, type_func: Callable) -> Optional[Any]:
+
     try:
         result = type_func(value)
         return result
-    except Exception:
+    except (ValueError, TypeError):
         return None
 
 print(safe_convert("123", int))
@@ -103,7 +104,7 @@ print(safe_convert(123, str))
 Напишите функцию sqrt_safe(n), которая считает квадратный корень из числа, 
 но при отрицательном n выбрасывает NegativeNumberError с понятным сообщением.
 """
-import math
+
 
 class NegativeNumberError(Exception):
     pass
@@ -126,15 +127,16 @@ print(sqrt_safe(-5))
 Обработайте все возможные исключения: деление на ноль, неизвестная операция, некорректные типы аргументов.
 """
 
-def calculator(a: float, b: float, op: str) -> float:
-
-    if not isinstance(a, (int, float)) or not isinstance(b, (int, float)):
-        raise TypeError("Arguments 'a' and 'b' must be numbers")
-
-    if op not in ["+", "-", "*", "/"]:
-        raise ValueError(f"Unknown operation: {op}")
-
+def calculator(a: float, b: float, op: str) -> float | None:
     try:
+        if not isinstance(a, (int, float)) or not isinstance(b, (int, float)):
+            print("Error: arguments must be numbers")
+            return None
+
+        if op not in ["+", "-", "*", "/"]:
+            print(f"Error: unknown operation '{op}'")
+            return None
+
         if op == "+":
             return a + b
         elif op == "-":
@@ -143,8 +145,10 @@ def calculator(a: float, b: float, op: str) -> float:
             return a * b
         elif op == "/":
             return a / b
+
     except ZeroDivisionError:
-        raise ZeroDivisionError("Division by zero is not allowed")
+        print("Error: division by zero")
+        return None
 
 
 print(calculator(10, 5, "+"))

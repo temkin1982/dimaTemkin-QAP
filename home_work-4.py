@@ -1,8 +1,9 @@
 import os
 
 from datetime import datetime
-
-
+from file_utils import read_lines, write_lines, count_words
+from typing import Callable
+from zoneinfo import ZoneInfo
 
 """
 1. Напиши функцию copy_file(source: str, destination: str) -> bool которая читает содержимое файла source и записывает его в destination. 
@@ -50,19 +51,25 @@ with open("grades.txt", "w") as f:
 
 with open("grades.txt", "r") as file:
     with open("grades_with_status.txt", 'w') as out:
+            for line in file:
+                try:
+                    if ',' not in line:
+                        print(f"Invalid line, skipping:{line}")
+                        continue
 
-        for line in file:
-            name, grade = line.strip().split(",")
-            grade = int(grade)
+                    name, grade = line.strip().split(",")
+                    grade = int(grade)
+                    if grade >= 90:
+                        status = "Great"
+                    elif grade >= 75:
+                        status = "Good"
+                    else:
+                        status = "satisfactorily"
 
-            if grade >= 90:
-                status = "Great"
-            elif grade >= 75:
-                status = "Good"
-            else:
-                status = "satisfactorily"
-
-            out.write(f"{name},{grade} = {status}\n")            
+                    out.write(f"{name},{grade} = {status}\n")  
+                except:
+                    print(f"Invalid line, skipping:{line}")
+                    continue         
 
 print(open("grades_with_status.txt").read())
 
@@ -75,7 +82,7 @@ print(open("grades_with_status.txt").read())
 def age_calculator(birth_date_str: str) -> int:
     birth_date = datetime.strptime(birth_date_str, "%d/%m/%Y")
 
-    date_now = datetime.now()
+    date_now = datetime.now(ZoneInfo("Asia/Jerusalem"))
 
     age = date_now.year - birth_date.year
 
@@ -100,8 +107,6 @@ def count_words(filename): ... # count_words считает сколько ра�
 """
 
 
-from file_utils import read_lines, write_lines, count_words
-
 # 1. Создаём тестовый файл
 write_lines("test.txt", [
     "Hello world\n",
@@ -125,7 +130,7 @@ print(words)
 которая возвращает вложенную функцию check(password). 
 Вложенная принимает пароль и возвращает True если совпадает, иначе False.
 """
-from typing import Callable
+
 
 
 def password_checker(correct_password: str) -> Callable[[str], bool]:

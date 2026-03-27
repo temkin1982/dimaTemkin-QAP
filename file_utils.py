@@ -1,22 +1,20 @@
-from typing import List, Dict
 
-
-def read_lines(filename: str) -> List[str]:
+def read_lines(filename: str) -> list[str]:
     with open(filename, 'r') as file:
         data = file.readlines()
 
     return data
 
 
-def write_lines(filename: str, lines: List[str]) -> None:
+def write_lines(filename: str, lines: list[str]) -> None:
     with open(filename, 'w') as file:
         for line in lines:
             file.write(line)
     
 
 
-def count_words(filename: str) -> Dict[str, int]:
-    word_count: Dict[str, int] = {}
+def count_words(filename: str) -> dict[str, int]:
+    word_count: dict[str, int] = {}
 
     with open(filename, "r") as f:
         for line in f:
