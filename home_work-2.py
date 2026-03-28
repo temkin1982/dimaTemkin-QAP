@@ -159,8 +159,8 @@ print(years_until_ten_percent(10,10))
 
 """
 1**2 + 9**2 = 82
-8**2 + 2**2
-6**2 + 8**2
+8**2 + 2**2 = 68
+6**2 + 8**2 = 100
 1**2 + 0**2 + 0**2
 """
 def sum_digits_with_add(number):
@@ -190,3 +190,5 @@ def is_lucky_number(number: int):
 
 check_lucky_number = int(input("Please enter a number to check if it is lucky: "))
 print(is_lucky_number(check_lucky_number))
+
+
