@@ -151,3 +151,19 @@ def binary_search(lst, target):
 
 print(binary_search([1, 2, 3, 4, 5], 3))
 print(binary_search([10, 20, 30, 40], 25))
+
+
+class MyClass:
+    a1 = 1
+    b1 = 2
+
+    def __init__(self, a2: int, b2: int):
+        self.a2 = a2
+        self.b2 = b2
+
+
+print(MyClass.a1)
+
+obj = MyClass(10, 20)
+
+print(obj.b2)
