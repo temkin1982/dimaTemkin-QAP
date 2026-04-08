@@ -1,5 +1,5 @@
 import math
-from typing import Iterator, List, Any, Callable,Optional
+from typing import Iterator, List, Any, Callable, Optional
 
 """
 1. Используя filter() и lambda, 
@@ -18,18 +18,22 @@ print(odd_numbers)
 последовательно применяя каждую ко всему списку.
 """
 
+
 def apply_operations(numbers: list, *operations) -> list[int]:
 
     for op in operations:
         numbers = op(numbers)
 
-    return numbers    
+    return numbers
 
-print(apply_operations(
-    [1, 2, 3],
-    lambda nums: [x * 2 for x in nums],
-    lambda nums: [x + 1 for x in nums]
-))
+
+print(
+    apply_operations(
+        [1, 2, 3],
+        lambda nums: [x * 2 for x in nums],
+        lambda nums: [x + 1 for x in nums],
+    )
+)
 
 """
 3. Напишите генератор chunked(lst, size), 
@@ -38,11 +42,10 @@ print(apply_operations(
 """
 
 
-
 def chunked(lst: list, size: int) -> Iterator[List[int]]:
     i = 0
     while i < len(lst):
-        yield lst[i:i + size]
+        yield lst[i : i + size]
         i += size
 
 
@@ -54,6 +57,7 @@ print(list(chunked(lst, size)))
 4. Напишите генератор prime_numbers(), 
 который бесконечно генерирует простые числа. Выведите первые 20.
 """
+
 
 def is_prime(n: int) -> bool:
     if n < 2:
@@ -92,11 +96,12 @@ def safe_convert(value: Any, type_func: Callable) -> Optional[Any]:
     except (ValueError, TypeError):
         return None
 
+
 print(safe_convert("123", int))
 print(safe_convert("3.14", float))
 print(safe_convert("abc", int))
 print(safe_convert("10.5", int))
-print(safe_convert(123, str))  
+print(safe_convert(123, str))
 
 
 """
@@ -109,11 +114,12 @@ print(safe_convert(123, str))
 class NegativeNumberError(Exception):
     pass
 
+
 def sqrt_safe(n: int) -> int:
     if n < 0:
         raise NegativeNumberError("Cannot take the square root of a negative number")
-    
-    return  math.sqrt(n)
+
+    return math.sqrt(n)
 
 
 print(sqrt_safe(9))
@@ -126,6 +132,7 @@ print(sqrt_safe(-5))
 где op — строка ("+", "-", "*", "/"). 
 Обработайте все возможные исключения: деление на ноль, неизвестная операция, некорректные типы аргументов.
 """
+
 
 def calculator(a: float, b: float, op: str) -> float | None:
     try:
