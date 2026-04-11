@@ -1,5 +1,6 @@
 import math
 from dataclasses import dataclass
+from typing import Iterator
 
 """
 1. Создай класс Circle с protected атрибутом _radius.
@@ -9,31 +10,31 @@ from dataclasses import dataclass
 
 
 class Circle:
-    def __init__(self, num_radius):
+    def __init__(self, num_radius: float) -> None:
         self._radius = num_radius
 
     @property
-    def radius(self):
+    def radius(self) -> float:
         return self._radius
 
     @radius.setter
-    def radius(self, value):
+    def radius(self, value: float) -> None:
         if value <= 0:
             raise ValueError("Radius must be greater than 0")
         self._radius = value
 
     @property
-    def area(self):
+    def area(self) -> float:
         return math.pi * self._radius**2
 
     @property
-    def perimeter(self):
+    def perimeter(self) -> float:
         return 2 * math.pi * self._radius
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"Circle with radius {self._radius}"
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return f"Circle(radius={self._radius})"
 
 
@@ -70,20 +71,22 @@ __str__ (вывод в формате "Vector(x, y)"),
 
 
 class Vector:
-    def __init__(self, x, y):
+    def __init__(self, x: float, y: float) -> None:
         self.x = x
         self.y = y
 
-    def __add__(self, other):
+    def __add__(self, other: "Vector") -> "Vector":
         sum_x = self.x + other.x
         sum_y = self.y + other.y
 
         return Vector(sum_x, sum_y)
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"Vector({self.x}, {self.y})"
 
-    def __eq__(self, other):
+    def __eq__(self, other: object) -> bool:
+        if not isinstance(other, Vector):
+            return False
         return self.x == other.x and self.y == other.y
 
 
@@ -105,37 +108,37 @@ print(Vector(10, 20))
 
 
 class Temperature:
-    def __init__(self, celsius):
+    def __init__(self, celsius: float) -> None:
         # Храним только Цельсий как внутреннее значение
         self._celsius = celsius
 
     @property
-    def celsius(self):
+    def celsius(self) -> float:
         # Просто возвращаем внутреннее значение
         return self._celsius
 
     @celsius.setter
-    def celsius(self, value):
+    def celsius(self, value: float) -> None:
         # При установке нового значения — сохраняем его
         self._celsius = value
 
     @property
-    def fahrenheit(self):
+    def fahrenheit(self) -> float:
         # Переводим Цельсий в Фаренгейт
         return self._celsius * 9 / 5 + 32
 
     @fahrenheit.setter
-    def fahrenheit(self, value):
+    def fahrenheit(self, value: float) -> float:
         # Переводим Фаренгейт в Цельсий и сохраняем
         self._celsius = (value - 32) * 5 / 9
 
     @property
-    def kelvin(self):
+    def kelvin(self) -> float:
         # Переводим Цельсий в Кельвин
         return self._celsius + 273.15
 
     @kelvin.setter
-    def kelvin(self, value):
+    def kelvin(self, value: float) -> None:
         # Переводим Кельвин в Цельсий и сохраняем
         self._celsius = value - 273.15
 
@@ -195,13 +198,13 @@ print(a.distance_to(b))  # 3.0
 
 
 class Countdown:
-    def __init__(self, start):
+    def __init__(self, start: int) -> None:
         self.current = start
 
-    def __iter__(self):
+    def __iter__(self) -> Iterator[int]:
         return self
 
-    def __next__(self):
+    def __next__(self) -> int:
         if self.current < 0:
             raise StopIteration
         else:

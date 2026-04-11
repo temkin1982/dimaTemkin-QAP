@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Any
 
 """
 1. Создай класс Library с атрибутом класса books = [] и методами add_book(title),
@@ -33,7 +33,7 @@ print(lib2.show_books())
 
 
 class Employee:
-    def __init__(self, name, salary) -> None:
+    def __init__(self, name: str, salary: float) -> None:
         self.name = name
         self.salary = salary
 
@@ -42,7 +42,7 @@ class Employee:
 
 
 class Manager(Employee):
-    def __init__(self, name, salary, department) -> None:
+    def __init__(self, name: str, salary: float, department: str) -> None:
         super().__init__(name, salary)
         self.department = department
 
@@ -51,7 +51,7 @@ class Manager(Employee):
 
 
 class Developer(Employee):
-    def __init__(self, name, salary, language) -> None:
+    def __init__(self, name: str, salary: float, language: str) -> None:
         super().__init__(name, salary)
         self.language = language
 
@@ -75,26 +75,26 @@ print(d.get_info())
 
 
 class Stack:
-    def __init__(self):
+    def __init__(self) -> None:
         self._items = []
 
-    def push(self, item):
+    def push(self, item: Any) -> None:
         self._items.append(item)
 
-    def pop(self):
+    def pop(self) -> Any:
         if self.is_empty():
             raise IndexError("Stack is empty")
         else:
             item = self._items.pop()
             return item
 
-    def peek(self):
+    def peek(self) -> Any:
         return self._items[-1]
 
-    def is_empty(self):
+    def is_empty(self) -> bool:
         return not self._items
 
-    def size(self):
+    def size(self) -> int:
         return len(self._items)
 
 
@@ -106,26 +106,26 @@ class Stack:
 
 
 class Vehicle:
-    def move(self):
+    def move(self) -> None:
         print("Moving.....")
 
 
 class Car(Vehicle):
-    def move(self):
+    def move(self) -> None:
         print("Moving Car")
 
 
 class Boat(Vehicle):
-    def move(self):
+    def move(self) -> None:
         print("Moving Boat")
 
 
 class Plane(Vehicle):
-    def move(self):
+    def move(self) -> None:
         print("Moving Plane")
 
 
-def start_journey(vehicle):
+def start_journey(vehicle) -> None:
     vehicle.move()
 
 
@@ -140,11 +140,11 @@ start_journey(car)
 
 
 class Student:
-    def __init__(self, name):
+    def __init__(self, name: str) -> None:
         self.name = name
         self._grades = []
 
-    def add_grade(self, grade):
+    def add_grade(self, grade: int) -> None:
         self._grades.append(grade)
 
     def average(self) -> float:
@@ -158,13 +158,13 @@ class Student:
 
         return sum_all_grades / count_grades
 
-    def highest(self):
+    def highest(self) -> int | None:
         if len(self._grades) == 0:
             return None
 
         return max(self._grades)
 
-    def lowest(self):
+    def lowest(self) -> int | None:
         if len(self._grades) == 0:
             return None
 
